@@ -87,5 +87,17 @@ function fillBlanks() {
                 }
             }
         }
+
+        // Checking if the correctGuess is false and gameOver is false
+        if (life > 0 && !correctGuess && !gameOver) {
+            life = life - 1;
+            $("#life").text(life);
+        } else if (life == 0) {
+            // Showing the losing message
+            $("#result").text("You Lost!");
+
+            // Setting the gameOver to true
+            gameOver = true;
+        }
     });
 }
