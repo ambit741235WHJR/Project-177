@@ -1,41 +1,24 @@
-let words = [
-    {
-        "inputs": 5,
-        "category": "Sports",
-        "word": "Chess"
-    },
-    {
-        "inputs": 6,
-        "category": "European Country Name",
-        "word": "France"
-    },
-    {
-        "inputs": 5,
-        "category": "Fruit",
-        "word": "Mango"
-    },
-    {
-        "inputs": 5,
-        "category": "Fruit",
-        "word": "Apple"
-    },
-    {
-        "inputs": 7,
-        "category": "Sports",
-        "word": "Cricket"
-    }
-];
-
 // Calling the fillBlanks function using jQuery
 $(document).ready(function () {
-    fillBlanks();
+    getTemplates();
 });
 
-// Function to fill the blanks
-function fillBlanks() {
-    // Getting the random word from the array
-    const randomWord = words[Math.floor(Math.random() * words.length)];
+// Function to fetch the templates
+function getTemplates() {
+    $.ajax({
+        url: "/get-templates",
+        type: "get",
+        success: function (result) {
+            fillBlanks(result.word)
+        },
+        error: function (result) {
+            alert(result.responseJSON.message)
+        }
+    })
+}
 
+// Function to fill the blanks
+function fillBlanks(randomWord) {
     // Clearing the blanks / Making the blanks empty
     $("#blanks").empty();
 
